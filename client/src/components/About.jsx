@@ -5,17 +5,21 @@ import aboutImage from '../image/img/ghar.jpg'
 const About = () => {
     return (
         <>
-            <div className=" container mx-auto mb-3 p-3">
+            <div className="mb-3 p-3">
                 <h5 className="card-title text-center" style={{ fontSize: '3rem' }}>About Us</h5>
-                <div className="flex md:flex-row flex:col lg:gap-8 md:gap-4">
-                    <div className="flex flex-col gap-4 md:gap-8">
-                        <img src={aboutImage} className='h-[300px] w-[900px]' alt="about" />
-                        <img src={aboutImage} className='h-[300px] w-[900px]' alt="about" />
+                <div className="flex md:flex-row flex:col lg:gap-12 md:gap-8">
+                    <div className="md:mt-12">
+                        <div className="my-4 rounded-full h-56 w-56 shadow-lg">
+                            <img src={aboutImage} className='h-full w-full rounded-full ' alt="about" />
+                        </div>
+                        <div className="my-4 rounded-full h-56 w-56 shadow-lg">
+                            <img src={aboutImage} className='h-full w-full rounded-full shadow-lg' alt="about" />
+                        </div>
                     </div>
                     <div className="">
                         <div className="card-body">
                             
-                            <p className="card-text">
+                            <div className="card-text">
                                 <span>
                                     <h4 className="aboutSubheading" style={{color:"#4dc7bc"}}>Incredible choice</h4>
                                     <p>Whether you want to stay in a chic city apartment, a luxury beach resort or a cosy B&B in the countryside, Booking.com provides you with amazing diversity and breadth of choice - all in one place.</p>
@@ -23,7 +27,7 @@ const About = () => {
 
                                 <span>
                                     <h4 className="aboutSubheading" style={{color:"#4dc7bc"}}>Low/Affordable Price</h4>
-                                    <p>We guarantees to offer you the best available rates. And with our promise to price match, you can rest assured that you’re always getting a great deal.</p>
+                                    <p>We guarantees to offer you the best available rates. And with our promise to price match, you can rest assured that you're always getting a great deal.</p>
                                 </span>
 
                                 <span>
@@ -45,7 +49,7 @@ const About = () => {
                                     <p>Whether you’ve just booked or are already enjoying your trip, our customer experience team are on hand around the clock to answer your questions and advocate on your behalf in more than 40 languages. Make sure to check out our FAQ for travellers.</p>
                                 </span>
 
-                            </p>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -20,11 +20,12 @@ const LibraryHead = () => {
   };
 
   return (
-    <div>
+    <>
       <LibraryNavbar />
+        <div>
       <div
-        className="container-fluid text-center  border-0 mt-8 pt-5"
-        style={{ height: "300px" }}
+        className="container-fluid text-center  border-0 md:mt-8 md:pt-5 pb-4 md:pb-8"
+        
       >
         <div className="card-body m-auto w-1/2">
           <h5 className="text-3xl font-semibold mb-4">
@@ -58,6 +59,7 @@ const LibraryHead = () => {
         {bookData.length > 0 && <LibraryCard book={bookData} />}
       </div>
     </div>
+    </>
   );
 };
 

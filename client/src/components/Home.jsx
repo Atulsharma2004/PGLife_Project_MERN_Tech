@@ -8,8 +8,33 @@ import { Link } from "react-router-dom";
 // import CityList from './CityList';
 import LibraryLink from "./LibraryLink";
 // import Footer from './Footer';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const [searchCity, setSearchCity] = useState("");
+  const navigate = useNavigate();
+
+  const cities = {
+    delhi: "Delhi",
+    mumbai: "Mumbai",
+    bangalore: "Bangalore",
+    lucknow: "Lucknow",
+  };
+
+  const handleCitySearch = (e) => {
+    e.preventDefault();
+    const lowerCaseSearch = searchCity.toLowerCase();
+
+    // Check if the lowercase search term matches a city
+    if (cities[lowerCaseSearch]) {
+      // Redirect to the city card list page based on the matched city
+      navigate(`/list/${encodeURIComponent(cities[lowerCaseSearch])}`);
+    } else {
+      // Handle the case where the entered city is not found
+      alert("City not found");
+    }
+  };
   return (
     <>
       {/* {{!-- ----------- content part start ----------------- --}} */}
@@ -34,7 +59,9 @@ const Home = () => {
           Happiness per Square Foot
         </h2>
         <div className="flex items-center justify-center mt-4">
-          <form id="search-form" method="GET">
+          <form id="search-form"
+            onSubmit={handleCitySearch}
+          >
             <div className="flex items-center">
               <div className="flex border border-purple-200 rounded">
                 <input
@@ -43,6 +70,8 @@ const Home = () => {
                   placeholder="Search..."
                   id="city"
                   name="city"
+                  value={searchCity} // Set the input value
+                  onChange={(e) => setSearchCity(e.target.value)}
                 />
                 <button
                   type="submit"
@@ -87,7 +116,7 @@ const Home = () => {
         <h1 className="city-heading mt-8">Major Cities</h1>
         <div className="flex md:flex-row flex-col  justify-center lg:gap-8 md:gap-4 gap:3">
           <div className="city-card-container ">
-            <Link to="list/Delhi">
+            <Link to="/list/Delhi">
               <div className="city-card rounded-full">
                 <img src={delhi} className="city-img" alt="city1" />
               </div>
@@ -95,7 +124,7 @@ const Home = () => {
           </div>
 
           <div className="city-card-container ">
-            <Link to="list/Mumbai">
+            <Link to="/list/Mumbai">
               <div className="city-card rounded-full">
                 <img src={mumbai} className="city-img" alt="city2" />
               </div>
@@ -103,7 +132,7 @@ const Home = () => {
           </div>
 
           <div className="city-card-container ">
-            <Link to="list/Bengaluru">
+            <Link to="/list/Bangalore">
               <div className="city-card rounded-full">
                 <img src={bengaluru} className="city-img" alt="city3" />
               </div>
@@ -111,7 +140,7 @@ const Home = () => {
           </div>
 
           <div className="city-card-container ">
-            <Link to="list/Lucknow">
+            <Link to="/list/Lucknow">
               <div className="city-card rounded-full">
                 <img src={lucknow} className="city-img" alt="city4" />
               </div>

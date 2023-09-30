@@ -8,6 +8,8 @@ import {
 } from "react-router-dom";
 
 import "./index.css";
+import { store } from "./redux/index";
+import { Provider } from "react-redux";
 import Home from "./components/Home.jsx";
 import About from "./components/About.jsx";
 import Contact from "./components/Contact.jsx";
@@ -30,24 +32,16 @@ const router = createBrowserRouter(
       <Route exact path="/list/:city" element={<List />} />
       <Route
         exact
-        path="/insideHostel/:name/:address"
+        path="/insideHostel/:name/:address/:filter/:rent/:exteriorImage/:interiorImage/:email/:phone/:_id"
         element={<InsideHostel />}
       />
-
-      {/* <Route exact path="/" element={<Intro/>} />
-    
-    <Route path="menu/:filterby" element={<Menu/>} />
-    <Route path="about" element={<About/>} />
-    <Route path="contact" element={<Contact/>} />
-    <Route path="login" element={<Login/>} />
-    <Route path="newproduct" element={<Newproduct/>} />
-    <Route path="signup" element={<Signup/>} />
-    <Route path="cart" element={<Cart/>} />
-    <Route path="success" element={<Success/>} />
-    <Route path="cancel" element={<Cancel/>} /> */}
     </Route>
   )
 );
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<RouterProvider router={router} />);
+root.render(
+  <Provider store={store}>
+    <RouterProvider router={router} />
+  </Provider>
+);

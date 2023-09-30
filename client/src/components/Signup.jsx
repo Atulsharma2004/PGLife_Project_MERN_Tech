@@ -1,11 +1,14 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import signImg from "../image/login3.gif";
 import { BiShow } from "react-icons/bi";
 import { BiHide } from "react-icons/bi";
 import { ImagetoBase64 } from "../utility/ImagetoBase64";
+import { toast } from 'react-hot-toast';
+const serverDomain = import.meta.env.VITE_SERVER_DOMAIN;
 
 const Signup = () => {
+  const navigate = useNavigate()
   const [showPassword, setshowPassword] = useState(false);
   const [showConfirmPassword, setshowConfirmPassword] = useState(false);
   const [data, setData] = useState({
@@ -15,6 +18,7 @@ const Signup = () => {
     password: "",
     cpassword: "",
     image: "",
+    city:"",
   });
   const handlePassword = () => {
     setshowPassword((preve) => !preve);
@@ -43,6 +47,34 @@ const Signup = () => {
       };
     });
   };
+
+  const handleSubmit = async (e) => {
+        e.preventDefault()
+        const { fname, email, password, cpassword, city } = data;
+        if (fname && email && password && cpassword && city) {
+            if (password === cpassword) {
+                const fetchData = await fetch(`${serverDomain}/signup`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(data)
+                })
+
+                const dataRes = await fetchData.json()
+                // console.log(dataRes)
+                // alert(dataRes.message)
+                toast(dataRes.message)
+                if (dataRes.alert) {
+                    navigate('/login')
+                }
+            } else {
+                alert('passwords did not match')
+            }
+        } else {
+            alert('please fill all the fields')
+        }
+    }
 
   return (
     <>
@@ -77,7 +109,7 @@ const Signup = () => {
             </label>
           </div>
 
-          <form action="">
+          <form action=""  onSubmit={handleSubmit}>
             <div className="mt-4 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-6">
               <div className="sm:col-span-3">
                 <label
@@ -91,7 +123,7 @@ const Signup = () => {
                     type="text"
                     name="fname"
                     id="fname"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  sm:text-sm sm:leading-6"
+                    className="block w-full rounded-md border-0 py-2 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-teal-500 placeholder:text-gray-400  sm:text-sm sm:leading-6"
                     onChange={handleOnChange}
                   />
                 </div>
@@ -109,7 +141,7 @@ const Signup = () => {
                     type="text"
                     name="lname"
                     id="lname"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  sm:text-sm sm:leading-6"
+                    className="block w-full rounded-md border-0 py-2 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-teal-500 placeholder:text-gray-400  sm:text-sm sm:leading-6"
                     onChange={handleOnChange}
                   />
                 </div>
@@ -127,7 +159,7 @@ const Signup = () => {
                     id="email"
                     name="email"
                     type="email"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  sm:text-sm sm:leading-6"
+                    className="block w-full rounded-md border-0 py-2 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-teal-500 placeholder:text-gray-400  sm:text-sm sm:leading-6"
                     onChange={handleOnChange}
                   />
                 </div>
@@ -140,16 +172,16 @@ const Signup = () => {
                 >
                   Password
                 </label>
-                <div className="mt-1 py-1 flex">
+                <div className="mt-1 py-1 relative">
                   <input
                     id="password"
                     name="password"
                     type={showPassword ? "text" : "password"}
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                    className="block w-full pr-10 rounded-md border-0 py-2 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-teal-500 placeholder:text-gray-400 sm:text-sm sm:leading-6"
                     onChange={handleOnChange}
                   />
                   <span
-                    className="flex text-xl cursor-pointer mt-2"
+                    className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer"
                     onClick={handlePassword}
                   >
                     {showPassword ? <BiShow /> : <BiHide />}
@@ -164,16 +196,16 @@ const Signup = () => {
                 >
                   Confirm Password
                 </label>
-                <div className="mt-1 flex  py-1">
+                <div className="mt-1 relative  py-1">
                   <input
-                    id="password"
+                    id="cpassword"
                     name="cpassword"
                     type={showConfirmPassword ? "text" : "password"}
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  sm:text-sm sm:leading-6"
+                    className="block w-full rounded-md border-0 py-2 px-2 text-gray-900 shadow-sm ring-1  ring-teal-500 placeholder:text-gray-400  sm:text-sm sm:leading-6"
                     onChange={handleOnChange}
                   />
                   <span
-                    className="flex text-xl cursor-pointer mt-2"
+                    className=" absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer"
                     onClick={handleConfirmPassword}
                   >
                     {showConfirmPassword ? <BiShow /> : <BiHide />}
@@ -193,7 +225,7 @@ const Signup = () => {
                     type="text"
                     name="city"
                     id="city"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  sm:text-sm sm:leading-6"
+                    className="block w-full rounded-md border-0 py-2 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-teal-500 placeholder:text-gray-400  sm:text-sm sm:leading-6"
                     onChange={handleOnChange}
                   />
                 </div>

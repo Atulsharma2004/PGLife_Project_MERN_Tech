@@ -1,20 +1,26 @@
 import "./App.css";
 import { Outlet } from "react-router-dom";
-// import { Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
+import { useEffect } from 'react';
+import { setDataProduct } from './redux/productSlice';
+import { useDispatch } from 'react-redux';
 import StickyNavbar from "./components/StickyNavbar";
-// import About from './components/About';
-// import Contact from './components/Contact';
-// import Login from './components/Login';
-// import Signup from './components/Signup';
-// import List from './components/List';
-// import LibraryHeader from './components/LibraryHeader';
-// import InsideHostel from './components/InsideHostel';
-// import Footer from './components/Footer';
+const serverDomain = import.meta.env.VITE_SERVER_DOMAIN;
+
 
 function App() {
+  const dispatch= useDispatch()
+  useEffect(()=>{
+    (async()=>{
+      const res= await fetch(`${serverDomain}/product`)
+      const resData=await res.json()
+      // console.log(resData)
+      dispatch(setDataProduct(resData))
+    })()
+  },[dispatch])
   return (
     <>
-      {/* <Toaster/> */}
+      <Toaster/>
       <StickyNavbar />
       <main className="mt-2 bg-slate-100 ">
         <Outlet />
