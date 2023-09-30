@@ -78,10 +78,6 @@ const InsideHostel = () => {
                     <StarBorderIcon />
                   </div>
                   <div className="flex flex-col mt-6">
-                    {/* <span>
-                      <FavoriteBorderIcon />
-                    </span>
-                    <span className="text-center">0</span> */}
                     {liked ? (
                       <>
                         <FavoriteIcon

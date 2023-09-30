@@ -1,11 +1,8 @@
 import PropTypes from "prop-types";
-// import cover from "../image/coverImage.jpeg";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import GradeIcon from "@mui/icons-material/Grade";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
-// import jsonData from "../Hosteldata.json";
-// import { useParams } from "react-router-dom";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
