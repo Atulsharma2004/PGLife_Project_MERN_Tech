@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import LibraryCard from "./LibraryCard";
 import LibraryNavbar from "./LibraryNavbar";
+const libraryApi = import.meta.env.VITE_LIBRARY_API_KEY;
 
 const LibraryHead = () => {
   const [search, setSearch] = useState("");
@@ -11,7 +12,7 @@ const LibraryHead = () => {
     e.preventDefault();
     axios
       .get(
-        `https://www.googleapis.com/books/v1/volumes?q=${search}&key=AIzaSyBCcY6LCFypsZgBz3MVmHn1dDGLLAYrCN0`
+        `https://www.googleapis.com/books/v1/volumes?q=${search}&key=${libraryApi}`
       )
       .then((data) => {
         setData(data.data.items);
