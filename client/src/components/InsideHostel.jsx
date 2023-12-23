@@ -1,5 +1,5 @@
 // import { Carousel } from "@material-tailwind/react";
-import first from "../image/1.jpg";
+// import first from "../image/1.jpg";
 // import second from "../image/2.jpg";
 // import third from "../image/3.jpg";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
@@ -8,7 +8,6 @@ import GradeIcon from "@mui/icons-material/Grade";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import Amenities from "./Amenities";
 import Reviews from "./Reviews";
-// import Footer from './Footer';
 import { Link, useNavigate, useParams } from "react-router-dom";
 import CarouselDefault from "./CarouselDefault";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,23 +15,14 @@ import { likeHostel } from "../redux/productSlice.jsx";
 import { useState } from "react";
 
 const InsideHostel = () => {
-  const {
-    name,
-    address,
-    filter,
-    rent,
-    exteriorImage,
-    interiorImage,
-    email,
-    phone,
-    _id,
-  } = useParams();
+  const { name, address, filter, rent, exteriorImage, interiorImage } =
+    useParams();
 
   const navigate = useNavigate();
   const userData = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  const productData = useSelector((state) => state.product);
-  const likedHostels = productData.likedHostels;
+  // const productData = useSelector((state) => state.product);
+  // const likedHostels = productData.likedHostels;
   const [liked, setLiked] = useState(false);
   const [count, setCount] = useState(0);
 

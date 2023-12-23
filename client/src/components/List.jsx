@@ -6,7 +6,7 @@ import StarBorderIcon from "@mui/icons-material/StarBorder";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { convertLength } from "@mui/material/styles/cssUtils";
+// import { convertLength } from "@mui/material/styles/cssUtils";
 import { likeHostel } from "../redux/productSlice.jsx";
 
 const List = () => {
@@ -29,8 +29,8 @@ const HostelCard = ({ host }) => {
   const navigate = useNavigate();
   const userData = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  const productData = useSelector((state) => state.product);
-  const likedHostels = productData.likedHostels;
+  // const productData = useSelector((state) => state.product);
+  // const likedHostels = productData.likedHostels;
   const [liked, setLiked] = useState(false);
   const [count, setCount] = useState(0);
 
